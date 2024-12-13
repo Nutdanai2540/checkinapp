@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ลงเวลา</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f4f4f9;
+        }
+        .container {
+            text-align: center;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            padding: 20px;
+            background-color: white;
+            width: 300px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .time {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        .label {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+        .input {
+            width: 100%;
+            padding: 10px;
+            font-size: 1rem;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .button {
+            width: 100%;
+            padding: 10px;
+            font-size: 1rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-bottom: 10px;
+        }
+        .button.submit {
+            background-color: #28a745;
+            color: white;
+        }
+        .button.submit:hover {
+            background-color: #218838;
+        }
+        .button.back {
+            background-color: #6c757d;
+            color: white;
+        }
+        .button.back:hover {
+            background-color: #5a6268;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="time" id="current-time">--:-- --</div>
+        <div class="label">กรอกรหัสพนักงาน</div>
+        <input type="text" class="input" placeholder="รหัสพนักงาน" id="employee-id">
+        <button class="button submit" onclick="submitTime()">ลงเวลา</button>
+        <button class="button back" onclick="goBack()">ย้อนกลับ</button>
+    </div>
+
+    <script>
+        // อัปเดตเวลาแบบเรียลไทม์
+        function updateTime() {
+            const timeElement = document.getElementById("current-time");
+            const now = new Date();
+            const hours = now.getHours() > 12 ? now.getHours() - 12 : now.getHours();
+            const minutes = String(now.getMinutes()).padStart(2, "0");
+            const ampm = now.getHours() >= 12 ? "PM" : "AM";
+            timeElement.textContent = `${hours}:${minutes} ${ampm}`;
+        }
+        setInterval(updateTime, 1000);
+        updateTime();
+
+        // ฟังก์ชันสำหรับปุ่มลงเวลา
+        function submitTime() {
+            const employeeId = document.getElementById("employee-id").value;
+            if (employeeId) {
+                alert(`ลงเวลาสำเร็จสำหรับรหัสพนักงาน: ${employeeId}`);
+            } else {
+                alert("กรุณากรอกรหัสพนักงาน");
+            }
+        }
+
+        // ฟังก์ชันสำหรับปุ่มย้อนกลับ
+        function goBack() {
+            alert("กลับไปยังหน้าก่อนหน้า");
+        }
+    </script>
+</body>
+</html>
